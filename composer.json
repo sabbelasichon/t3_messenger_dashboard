@@ -18,9 +18,6 @@
     "typo3/cms-core": "^10.4 || ^11.5",
     "typo3/cms-extbase": "^10.4 || ^11.5",
     "typo3/cms-dashboard": "^10.4 || ^11.5",
-    "symfony/messenger": "^5.0 || ^6.2",
-    "symfony/options-resolver": "^5.0 || ^6.2",
-    "symfony/doctrine-messenger": "^5.0 || ^6.2",
     "ssch/t3-messenger": "^1.0",
     "ext-json": "*"
   },
@@ -34,8 +31,8 @@
     "phpstan/extension-installer": "^1.2",
     "typo3/testing-framework": "^6.0 || ^7.0.2",
     "helhum/typo3-console": "^6.0 || ^7.1 || ^8.0",
-    "typo3/minimal": "^10.4 || ^11.5 || ^12.4",
-    "typo3/cms-lowlevel": "^10.4 || ^11.5 || ^12.4"
+    "typo3/minimal": "^10.4 || ^11.5",
+    "typo3/cms-lowlevel": "^10.4 || ^11.5"
   },
   "replace": {
     "typo3-ter/t3-messenger-dashboard": "self.version"

@@ -19,6 +19,14 @@ final class FailureReceiverPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
+        if(!$container->hasDefinition(FailedMessageRepository::class)) {
+            return;
+        }
+
+        if(!$container->hasDefinition('console.command.messenger_failed_messages_show')) {
+            return;
+        }
+
         $failureMessageRepositoryDefinition = $container->getDefinition(FailedMessageRepository::class);
         $failedMessagesShowCommandDefinition = $container->getDefinition(
             'console.command.messenger_failed_messages_show'

@@ -1,0 +1,16 @@
+{
+  "name": "ssch/t3-messenger-dashboard-test",
+  "type": "typo3-cms-extension",
+  "description": "Test extensions for t3_messenger_dashboard",
+  "license": "GPL-2.0+",
+  "require": {
+    "ssch/t3-messenger-dashboard": "*"
+  },
+  "autoload": {
+    "Ssch\\T3MessengerDashboardTest\\": "Classes"
+  },
+  "replace": {
+    "t3_messenger_dashboard_test": "self.version",
+    "typo3-ter/t3-messenger-dashboard-test": "self.version"
+  }
+}
