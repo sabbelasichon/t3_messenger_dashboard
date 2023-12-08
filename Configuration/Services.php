@@ -25,8 +25,15 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
         ->autowire()
         ->autoconfigure();
 
+    // Test configuration ignore
+    $containerConfigurator->import(__DIR__ . '/../Classes/Test/Configuration/Services.php', null, true);
+
     $services->load('Ssch\\T3MessengerDashboard\\', __DIR__ . '/../Classes/')
-        ->exclude([__DIR__ . '/../Classes/DependencyInjection']);
+        ->exclude([
+            __DIR__ . '/../Classes/DependencyInjection',
+            __DIR__ . '/../Classes/Test/Configuration',
+            __DIR__ . '/../Classes/Test/Command',
+        ]);
 
     // Dashboard Integration
     $services->set(FailedMessageRepository::class)->args(

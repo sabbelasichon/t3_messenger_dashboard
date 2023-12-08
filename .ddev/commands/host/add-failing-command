@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ddev exec .Build/bin/typo3cms add-failing-message:command
+ddev exec .Build/bin/typo3cms t3_messenger:consume-messages --limit=1 async

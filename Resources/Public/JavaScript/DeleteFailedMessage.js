@@ -1,4 +1,4 @@
-define(['require', 'TYPO3/CMS/Backend/Modal', "TYPO3/CMS/Core/Event/RegularEvent", "TYPO3/CMS/Backend/Enum/Severity", "TYPO3/CMS/Core/Ajax/AjaxRequest", "TYPO3/CMS/T3Messenger/RefreshFailedMessages"], function (require, Modal, Event, Severity, AjaxRequest, RefreshFailedMessages) {
+define(['require', 'TYPO3/CMS/Backend/Modal', "TYPO3/CMS/Core/Event/RegularEvent", "TYPO3/CMS/Backend/Enum/Severity", "TYPO3/CMS/Core/Ajax/AjaxRequest", "TYPO3/CMS/T3MessengerDashboard/RefreshFailedMessages"], function (require, Modal, Event, Severity, AjaxRequest, RefreshFailedMessages) {
     "use strict";
     return new class {
         constructor() {
