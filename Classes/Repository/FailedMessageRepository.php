@@ -13,7 +13,6 @@ namespace Ssch\T3MessengerDashboard\Repository;
 
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
-use Psr\Log\LoggerInterface;
 use Ssch\T3MessengerDashboard\Dashboard\Widgets\Dto\MessageSpecification;
 use Ssch\T3MessengerDashboard\Domain\Dto\FailedMessage;
 use Symfony\Component\Console\Exception\RuntimeException;
@@ -30,6 +29,7 @@ use TYPO3\CMS\Core\SingletonInterface;
 final class FailedMessageRepository implements SingletonInterface, LoggerAwareInterface
 {
     use LoggerAwareTrait;
+
     private ServiceProviderInterface $failureTransports;
 
     private MessageBusInterface $messageBus;
