@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the "t3_messenger" Extension for TYPO3 CMS.
+ * This file is part of the "t3_messenger_dashboard" Extension for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace Ssch\T3Messenger\Tests\Functional\Repository;
+namespace Ssch\T3MessengerDashboard\Tests\Functional\Repository;
 
-use Ssch\T3Messenger\Repository\FailedMessageRepository;
-use Ssch\T3Messenger\Tests\Functional\Fixtures\Extensions\t3_messenger_test\Classes\Command\MyFailingCommand;
-use Ssch\T3Messenger\Tests\Functional\Fixtures\Extensions\t3_messenger_test\Classes\Command\MyOtherFailingCommand;
+use Ssch\T3MessengerDashboard\Repository\FailedMessageRepository;
+use Ssch\T3MessengerDashboard\Tests\Functional\Fixtures\Extensions\t3_messenger_dashboard_test\Classes\Command\MyFailingCommand;
+use Ssch\T3MessengerDashboard\Tests\Functional\Fixtures\Extensions\t3_messenger_dashboard_test\Classes\Command\MyOtherFailingCommand;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Messenger\EventListener\StopWorkerOnFailureLimitListener;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -32,7 +32,7 @@ final class FailedMessageRepositoryTest extends FunctionalTestCase
             'typo3conf/ext/typo3_psr_cache_adapter',
             'typo3conf/ext/t3_messenger',
             'typo3conf/ext/t3_messenger_dashboard',
-            'typo3conf/ext/t3_messenger/Tests/Functional/Fixtures/Extensions/t3_messenger_test',
+            'typo3conf/ext/t3_messenger_dashboard/Tests/Functional/Fixtures/Extensions/t3_messenger_dashboard_test',
         ];
         parent::setUp();
         $this->subject = $this->get(FailedMessageRepository::class);

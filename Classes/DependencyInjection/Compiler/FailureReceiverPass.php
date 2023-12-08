@@ -21,14 +21,14 @@ final class FailureReceiverPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if(!$container->hasDefinition(FailedMessageRepository::class)) {
+        if (! $container->hasDefinition(FailedMessageRepository::class)) {
             return;
         }
 
         $failureMessageRepositoryDefinition = $container->getDefinition(FailedMessageRepository::class);
 
         // Remove everything if no fail queued is defined
-        if(!$container->hasDefinition('console.command.messenger_failed_messages_show')) {
+        if (! $container->hasDefinition('console.command.messenger_failed_messages_show')) {
             $container->removeDefinition(FailedMessageRepository::class);
             $container->removeDefinition(FailedMessageController::class);
             $container->removeDefinition(FailedMessagesDataProvider::class);
@@ -36,8 +36,9 @@ final class FailureReceiverPass implements CompilerPassInterface
             return;
         }
 
-
-        $failedMessagesShowCommandDefinition = $container->getDefinition('console.command.messenger_failed_messages_show');
+        $failedMessagesShowCommandDefinition = $container->getDefinition(
+            'console.command.messenger_failed_messages_show'
+        );
         $failureMessageRepositoryDefinition->replaceArgument(0, $failedMessagesShowCommandDefinition->getArgument(1));
     }
 }
