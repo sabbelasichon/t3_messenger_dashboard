@@ -18,7 +18,7 @@
     "typo3/cms-core": "^10.4 || ^11.5",
     "typo3/cms-extbase": "^10.4 || ^11.5",
     "typo3/cms-dashboard": "^10.4 || ^11.5",
-    "ssch/t3-messenger": "^1.0",
+    "ssch/t3-messenger": "^2.0.x-dev",
     "ext-json": "*"
   },
   "require-dev": {
