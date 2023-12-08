@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\Repository;
 
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
 use Ssch\T3MessengerDashboard\Dashboard\Widgets\Dto\MessageSpecification;
 use Ssch\T3MessengerDashboard\Domain\Dto\FailedMessage;
@@ -25,22 +27,20 @@ use Symfony\Component\Messenger\Worker;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 
-final class FailedMessageRepository implements SingletonInterface
+final class FailedMessageRepository implements SingletonInterface, LoggerAwareInterface
 {
+    use LoggerAwareTrait;
     private ServiceProviderInterface $failureTransports;
 
     private MessageBusInterface $messageBus;
 
     private EventDispatcher $eventDispatcher;
 
-    private LoggerInterface $logger;
-
-    public function __construct(ServiceProviderInterface $failureTransports, EventDispatcher $eventDispatcher, MessageBusInterface $messageBus, LoggerInterface $logger)
+    public function __construct(ServiceProviderInterface $failureTransports, EventDispatcher $eventDispatcher, MessageBusInterface $messageBus)
     {
         $this->failureTransports = $failureTransports;
         $this->messageBus = $messageBus;
         $this->eventDispatcher = $eventDispatcher;
-        $this->logger = $logger;
     }
 
     /**
