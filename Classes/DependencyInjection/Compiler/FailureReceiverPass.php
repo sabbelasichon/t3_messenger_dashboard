@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\DependencyInjection\Compiler;
 
+use Ssch\T3MessengerDashboard\Dashboard\Widgets\Controller\FailedMessageController;
+use Ssch\T3MessengerDashboard\Dashboard\Widgets\Provider\FailedMessagesDataProvider;
 use Ssch\T3MessengerDashboard\Repository\FailedMessageRepository;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,14 +25,19 @@ final class FailureReceiverPass implements CompilerPassInterface
             return;
         }
 
+        $failureMessageRepositoryDefinition = $container->getDefinition(FailedMessageRepository::class);
+
+        // Remove everything if no fail queued is defined
         if(!$container->hasDefinition('console.command.messenger_failed_messages_show')) {
+            $container->removeDefinition(FailedMessageRepository::class);
+            $container->removeDefinition(FailedMessageController::class);
+            $container->removeDefinition(FailedMessagesDataProvider::class);
+            $container->removeDefinition('dashboard.widget.failedMessages');
             return;
         }
 
-        $failureMessageRepositoryDefinition = $container->getDefinition(FailedMessageRepository::class);
-        $failedMessagesShowCommandDefinition = $container->getDefinition(
-            'console.command.messenger_failed_messages_show'
-        );
+
+        $failedMessagesShowCommandDefinition = $container->getDefinition('console.command.messenger_failed_messages_show');
         $failureMessageRepositoryDefinition->replaceArgument(0, $failedMessagesShowCommandDefinition->getArgument(1));
     }
 }
