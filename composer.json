@@ -83,7 +83,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0.x-dev"
+      "dev-main": "1.0.x-dev"
     },
     "typo3/cms": {
       "extension-key": "t3_messenger_dashboard",
