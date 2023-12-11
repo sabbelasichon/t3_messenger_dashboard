@@ -17,7 +17,7 @@
                     </thead>
                     <tbody>
                     <f:for each="{failedMessages}" as="failedMessage">
-                        <tr>
+                        <tr id="failed-widget-{failedMessage.transportName}-{failedMessage.messageId}">
                             <td>
                                 {failedMessage.messageId}
                             </td>
