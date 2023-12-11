@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\Dashboard\Widgets\Dto;
 
+use Ssch\T3MessengerDashboard\Domain\Dto\FailedMessage;
 use Webmozart\Assert\Assert;
 
 final class MessageSpecification
@@ -37,6 +38,11 @@ final class MessageSpecification
         Assert::keyExists($array, 'transport');
 
         return new self($array['id'], $array['transport']);
+    }
+
+    public static function fromFailedMessage(FailedMessage $failedMessage): self
+    {
+        return new self($failedMessage->getMessageId(), $failedMessage->getTransportName());
     }
 
     /**

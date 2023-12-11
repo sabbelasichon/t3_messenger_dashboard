@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\Tests\Functional\Repository;
 
+use Ssch\T3MessengerDashboard\Dashboard\Widgets\Dto\MessageSpecification;
 use Ssch\T3MessengerDashboard\Repository\FailedMessageRepository;
 use Ssch\T3MessengerDashboard\Tests\Functional\Fixtures\Extensions\t3_messenger_dashboard_test\Classes\Command\MyFailingCommand;
 use Ssch\T3MessengerDashboard\Tests\Functional\Fixtures\Extensions\t3_messenger_dashboard_test\Classes\Command\MyOtherFailingCommand;
@@ -39,7 +40,7 @@ final class FailedMessageRepositoryTest extends FunctionalTestCase
         $this->messageBus = $this->get(MessageBusInterface::class);
     }
 
-    public function test(): void
+    public function testListFailedMessages(): void
     {
         // Arrange
         $this->messageBus->dispatch(new MyFailingCommand('Add to failed queue'));
@@ -70,6 +71,29 @@ final class FailedMessageRepositoryTest extends FunctionalTestCase
                 'error_message' => 'Failing by intention',
             ],
         ], $failedMessagesInAssertion);
+    }
+
+    public function testDeleteFailedMessage(): void
+    {
+        // Arrange
+        $this->messageBus->dispatch(new MyFailingCommand('Add to failed queue'));
+        $this->runWorker();
+        $this->messageBus->dispatch(new MyOtherFailingCommand('Add to failed queue'));
+        $this->runWorker();
+
+        // Act
+        $failedMessages = $this->subject->list();
+
+        // Assert
+        self::assertCount(2, $failedMessages);
+
+        // Act
+        foreach ($failedMessages as $failedMessage) {
+            $this->subject->removeMessage(MessageSpecification::fromFailedMessage($failedMessage));
+        }
+
+        // Assert
+        self::assertCount(0, $this->subject->list());
     }
 
     private function runWorker(): void
