@@ -16,8 +16,4 @@ return [
         'path' => '/t3-messenger/failed-messages/delete',
         'target' => FailedMessageController::class . '::deleteMessageAction',
     ],
-    't3_messenger_failed_messages_retry' => [
-        'path' => '/t3-messenger/failed-messages/retry',
-        'target' => FailedMessageController::class . '::retryMessageAction',
-    ],
 ];

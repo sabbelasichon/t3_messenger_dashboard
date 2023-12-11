@@ -58,9 +58,6 @@ final class ListOfFailedMessagesWidget implements WidgetInterface, RequireJsModu
 
     public function getRequireJsModules(): array
     {
-        return [
-            'TYPO3/CMS/T3MessengerDashboard/RetryFailedMessage',
-            'TYPO3/CMS/T3MessengerDashboard/DeleteFailedMessage',
-        ];
+        return ['TYPO3/CMS/T3MessengerDashboard/DeleteFailedMessage'];
     }
 }

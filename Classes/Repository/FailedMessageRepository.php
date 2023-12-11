@@ -16,13 +16,8 @@ use Psr\Log\LoggerAwareTrait;
 use Ssch\T3MessengerDashboard\Dashboard\Widgets\Dto\MessageSpecification;
 use Ssch\T3MessengerDashboard\Domain\Dto\FailedMessage;
 use Symfony\Component\Console\Exception\RuntimeException;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Messenger\Envelope;
-use Symfony\Component\Messenger\EventListener\StopWorkerOnMessageLimitListener;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
-use Symfony\Component\Messenger\Transport\Receiver\SingleMessageReceiver;
-use Symfony\Component\Messenger\Worker;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 use TYPO3\CMS\Core\SingletonInterface;
 
@@ -32,15 +27,9 @@ final class FailedMessageRepository implements SingletonInterface, LoggerAwareIn
 
     private ServiceProviderInterface $failureTransports;
 
-    private MessageBusInterface $messageBus;
-
-    private EventDispatcher $eventDispatcher;
-
-    public function __construct(ServiceProviderInterface $failureTransports, EventDispatcher $eventDispatcher, MessageBusInterface $messageBus)
+    public function __construct(ServiceProviderInterface $failureTransports)
     {
         $this->failureTransports = $failureTransports;
-        $this->messageBus = $messageBus;
-        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -73,30 +62,6 @@ final class FailedMessageRepository implements SingletonInterface, LoggerAwareIn
         $envelope = $this->findMessage($messageSpecification->getId(), $failureTransport);
 
         $failureTransport->reject($envelope);
-    }
-
-    public function retryMessage(MessageSpecification $messageSpecification): void
-    {
-        $failureTransport = $this->getReceiver($messageSpecification->getTransport());
-
-        $envelope = $this->findMessage($messageSpecification->getId(), $failureTransport);
-
-        $singleReceiver = new SingleMessageReceiver($failureTransport, $envelope);
-
-        $subscriber = new StopWorkerOnMessageLimitListener(1);
-        $this->eventDispatcher->addSubscriber($subscriber);
-
-        $worker = new Worker(
-            [
-                $messageSpecification->getTransport() => $singleReceiver,
-            ],
-            $this->messageBus,
-            $this->eventDispatcher,
-            $this->logger
-        );
-
-        $worker->run();
-        $this->eventDispatcher->removeSubscriber($subscriber);
     }
 
     /**

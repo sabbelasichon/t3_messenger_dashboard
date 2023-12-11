@@ -38,13 +38,4 @@ final class FailedMessageController implements SingletonInterface
             'result' => 1,
         ]);
     }
-
-    public function retryMessageAction(ServerRequestInterface $request): ResponseInterface
-    {
-        $messageSpecification = $this->jsonSerializer->decode($request->getBody()->__toString());
-        $this->failedMessageRepository->retryMessage($messageSpecification);
-        return new JsonResponse([
-            'result' => 1,
-        ]);
-    }
 }
