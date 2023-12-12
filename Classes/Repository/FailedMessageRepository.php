@@ -11,20 +11,15 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\Repository;
 
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerAwareTrait;
 use Ssch\T3MessengerDashboard\Dashboard\Widgets\Dto\MessageSpecification;
 use Ssch\T3MessengerDashboard\Domain\Dto\FailedMessage;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
-use TYPO3\CMS\Core\SingletonInterface;
 
-final class FailedMessageRepository implements SingletonInterface, LoggerAwareInterface
+final class FailedMessageRepository
 {
-    use LoggerAwareTrait;
-
     private ServiceProviderInterface $failureTransports;
 
     public function __construct(ServiceProviderInterface $failureTransports)
