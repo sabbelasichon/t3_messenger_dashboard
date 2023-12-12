@@ -44,7 +44,9 @@ return static function (ContainerConfigurator $containerConfigurator, ContainerB
         ->class(ListOfFailedMessagesWidget::class)
         ->arg('$dataProvider', service(FailedMessagesDataProvider::class))
         ->arg('$view', service('dashboard.views.widget'))
-        ->arg('$options', ['refreshAvailable' => true])
+        ->arg('$options', [
+            'refreshAvailable' => true,
+        ])
         ->tag(
             'dashboard.widget',
             [
