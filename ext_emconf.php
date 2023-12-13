@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = [
     'constraints' => [
         'depends' => [
             'typo3' => '10.4.0-11.5.99',
-            't3_messenger' => '1.0.0-1.9.99'
+            't3_messenger' => '2.0.0-2.9.99'
         ],
         'conflicts' => [
         ],
