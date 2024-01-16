@@ -20,11 +20,8 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 
 final class FailedMessageRepository
 {
-    private ServiceProviderInterface $failureTransports;
-
-    public function __construct(ServiceProviderInterface $failureTransports)
+    public function __construct(private readonly ServiceProviderInterface $failureTransports)
     {
-        $this->failureTransports = $failureTransports;
     }
 
     /**
@@ -36,7 +33,7 @@ final class FailedMessageRepository
         foreach ($this->failureTransports->getProvidedServices() as $serviceId => $_) {
             try {
                 $failureTransport = $this->getReceiver($serviceId);
-            } catch (\RuntimeException $runtimeException) {
+            } catch (\RuntimeException) {
                 continue;
             }
 

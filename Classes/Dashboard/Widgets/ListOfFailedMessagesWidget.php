@@ -20,25 +20,8 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 final class ListOfFailedMessagesWidget implements WidgetInterface, JavaScriptInterface
 {
-    private WidgetConfigurationInterface $configuration;
-
-    private ListDataProviderInterface $dataProvider;
-
-    private StandaloneView $view;
-
-    private array $options;
-
-    public function __construct(
-        WidgetConfigurationInterface $configuration,
-        ListDataProviderInterface    $dataProvider,
-        StandaloneView               $view,
-        array                        $options = []
-    )
+    public function __construct(private readonly WidgetConfigurationInterface $configuration, private readonly ListDataProviderInterface    $dataProvider, private readonly StandaloneView               $view, private readonly array                        $options = [])
     {
-        $this->configuration = $configuration;
-        $this->dataProvider = $dataProvider;
-        $this->view = $view;
-        $this->options = $options;
     }
 
     public function renderWidgetContent(): string
