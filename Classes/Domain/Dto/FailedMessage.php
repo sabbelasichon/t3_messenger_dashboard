@@ -20,45 +20,10 @@ use Symfony\Component\Messenger\Stamp\TransportMessageIdStamp;
 final class FailedMessage
 {
     /**
-     * @var class-string
-     */
-    private string $message;
-
-    private string $errorMessage;
-
-    private DateTimeInterface $redelivered;
-
-    private int $retryCount;
-
-    /**
-     * @var mixed
-     */
-    private $messageId;
-
-    private string $transportName;
-
-    private string $shortMessageClass;
-
-    /**
      * @param class-string $message
-     * @param mixed $messageId
      */
-    private function __construct(
-        string $message,
-        string $shortMessageClass,
-        string $errorMessage,
-        DateTimeInterface $redelivered,
-        int $retryCount,
-        $messageId,
-        string $transportName
-    ) {
-        $this->message = $message;
-        $this->errorMessage = $errorMessage;
-        $this->redelivered = $redelivered;
-        $this->retryCount = $retryCount;
-        $this->messageId = $messageId;
-        $this->transportName = $transportName;
-        $this->shortMessageClass = $shortMessageClass;
+    private function __construct(private readonly string $message, private readonly string $shortMessageClass, private readonly string $errorMessage, private readonly DateTimeInterface $redelivered, private readonly int $retryCount, private readonly mixed $messageId, private readonly string $transportName)
+    {
     }
 
     public function getShortMessageClass(): string
@@ -124,7 +89,7 @@ final class FailedMessage
         }
 
         return new self(
-            get_class($failedMessage->getMessage()),
+            $failedMessage->getMessage()::class,
             (new \ReflectionClass($failedMessage->getMessage()))->getShortName(),
             $errorMessage,
             $redeliveryStamp->getRedeliveredAt(),

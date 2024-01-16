@@ -11,32 +11,17 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\Dashboard\Widgets;
 
+use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
+use TYPO3\CMS\Dashboard\Widgets\JavaScriptInterface;
 use TYPO3\CMS\Dashboard\Widgets\ListDataProviderInterface;
-use TYPO3\CMS\Dashboard\Widgets\RequireJsModuleInterface;
 use TYPO3\CMS\Dashboard\Widgets\WidgetConfigurationInterface;
 use TYPO3\CMS\Dashboard\Widgets\WidgetInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
-final class ListOfFailedMessagesWidget implements WidgetInterface, RequireJsModuleInterface
+final class ListOfFailedMessagesWidget implements WidgetInterface, JavaScriptInterface
 {
-    private WidgetConfigurationInterface $configuration;
-
-    private ListDataProviderInterface $dataProvider;
-
-    private StandaloneView $view;
-
-    private array $options;
-
-    public function __construct(
-        WidgetConfigurationInterface $configuration,
-        ListDataProviderInterface $dataProvider,
-        StandaloneView $view,
-        array $options = []
-    ) {
-        $this->configuration = $configuration;
-        $this->dataProvider = $dataProvider;
-        $this->view = $view;
-        $this->options = $options;
+    public function __construct(private readonly WidgetConfigurationInterface $configuration, private readonly ListDataProviderInterface    $dataProvider, private readonly StandaloneView               $view, private readonly array                        $options = [])
+    {
     }
 
     public function renderWidgetContent(): string
@@ -56,11 +41,12 @@ final class ListOfFailedMessagesWidget implements WidgetInterface, RequireJsModu
         return $this->options;
     }
 
-    public function getRequireJsModules(): array
+    public function getJavaScriptModuleInstructions(): array
     {
         return [
-            'TYPO3/CMS/T3MessengerDashboard/DeleteFailedMessage',
-            'TYPO3/CMS/T3MessengerDashboard/ScrollToFailedMessage',
+            JavaScriptModuleInstruction::create('@ssch/t3-messenger-dashboard/delete-failed-message.js'),
+            JavaScriptModuleInstruction::create('@ssch/t3-messenger-dashboard/scroll-to-failed-message.js'),
         ];
     }
+
 }

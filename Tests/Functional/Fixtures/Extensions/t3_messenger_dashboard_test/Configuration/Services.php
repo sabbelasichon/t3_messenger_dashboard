@@ -10,6 +10,7 @@ declare(strict_types=1);
  */
 
 use Ssch\T3MessengerDashboard\Tests\Functional\Fixtures\Extensions\t3_messenger_dashboard_test\Classes\Handlers\MyMessengerHandler;
+use Ssch\T3MessengerDashboard\Tests\Functional\Fixtures\Extensions\t3_messenger_dashboard_test\Classes\Handlers\MySecondMessengerHandler;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -18,5 +19,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->set(MyMessengerHandler::class)->tag('messenger.message_handler');
+    $services->set(MyMessengerHandler::class);
+    $services->set(MySecondMessengerHandler::class);
 };

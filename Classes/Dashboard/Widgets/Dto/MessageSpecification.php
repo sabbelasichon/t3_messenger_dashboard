@@ -17,19 +17,10 @@ use Webmozart\Assert\Assert;
 final class MessageSpecification
 {
     /**
-     * @var int|string
-     */
-    private $id;
-
-    private string $transport;
-
-    /**
      * @param string|int $id
      */
-    private function __construct($id, string $transport)
+    private function __construct(private $id, private readonly string $transport)
     {
-        $this->id = $id;
-        $this->transport = $transport;
     }
 
     public static function fromArray(array $array): self
