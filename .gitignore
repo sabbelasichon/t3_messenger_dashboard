@@ -8,3 +8,4 @@ Tests/Build/.phpunit.result.cache
 config
 Configuration/Messenger.php
 Classes/Test
+/node_modules

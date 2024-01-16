@@ -1,0 +1,1 @@
+import e from"jquery";e('.dashboard-item[data-widget-key="failedMessages"]').on("widgetContentRendered",(function(a){const t=new URLSearchParams(window.location.search),o=e(a.target).find("#failed-widget-"+t.get("messageId"));o.length&&(o.css("background-color","#ffeeba"),o[0].scrollIntoView())}));
