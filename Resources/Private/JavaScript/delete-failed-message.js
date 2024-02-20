@@ -15,7 +15,7 @@ import RefreshFailedMessages from './refresh-failed-messages.js'
                 e.preventDefault();
 
                 const messageTransport = this.dataset.messageTransport
-                const id = 55
+                const id = this.dataset.messageId
                 Modal.advanced({
                     title: this.dataset.modalTitle,
                     content: this.dataset.modalQuestion,
