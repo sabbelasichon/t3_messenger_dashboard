@@ -20,8 +20,10 @@ use TYPO3\CMS\Core\SingletonInterface;
 
 final class FailedMessageController implements SingletonInterface
 {
-    public function __construct(private readonly FailedMessageRepository $failedMessageRepository, private readonly JsonSerializer $jsonSerializer)
-    {
+    public function __construct(
+        private readonly FailedMessageRepository $failedMessageRepository,
+        private readonly JsonSerializer $jsonSerializer
+    ) {
     }
 
     public function deleteMessageAction(ServerRequestInterface $request): ResponseInterface

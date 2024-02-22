@@ -20,8 +20,12 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 final class ListOfFailedMessagesWidget implements WidgetInterface, JavaScriptInterface
 {
-    public function __construct(private readonly WidgetConfigurationInterface $configuration, private readonly ListDataProviderInterface    $dataProvider, private readonly StandaloneView               $view, private readonly array                        $options = [])
-    {
+    public function __construct(
+        private readonly WidgetConfigurationInterface $configuration,
+        private readonly ListDataProviderInterface $dataProvider,
+        private readonly StandaloneView $view,
+        private readonly array $options = []
+    ) {
     }
 
     public function renderWidgetContent(): string
@@ -48,5 +52,4 @@ final class ListOfFailedMessagesWidget implements WidgetInterface, JavaScriptInt
             JavaScriptModuleInstruction::create('@ssch/t3-messenger-dashboard/scroll-to-failed-message.js'),
         ];
     }
-
 }

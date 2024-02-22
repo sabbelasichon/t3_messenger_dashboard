@@ -19,8 +19,10 @@ final class MessageSpecification
     /**
      * @param string|int $id
      */
-    private function __construct(private $id, private readonly string $transport)
-    {
+    private function __construct(
+        private $id,
+        private readonly string $transport
+    ) {
     }
 
     public static function fromArray(array $array): self

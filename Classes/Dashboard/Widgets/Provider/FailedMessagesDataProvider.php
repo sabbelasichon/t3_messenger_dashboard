@@ -16,8 +16,9 @@ use TYPO3\CMS\Dashboard\Widgets\ListDataProviderInterface;
 
 final class FailedMessagesDataProvider implements ListDataProviderInterface
 {
-    public function __construct(private readonly FailedMessageRepository $failedMessageRepository)
-    {
+    public function __construct(
+        private readonly FailedMessageRepository $failedMessageRepository
+    ) {
     }
 
     public function getItems(): array

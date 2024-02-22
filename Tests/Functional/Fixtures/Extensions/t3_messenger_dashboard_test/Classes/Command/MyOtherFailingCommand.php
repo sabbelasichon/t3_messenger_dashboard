@@ -13,8 +13,9 @@ namespace Ssch\T3MessengerDashboard\Tests\Functional\Fixtures\Extensions\t3_mess
 
 final class MyOtherFailingCommand
 {
-    public function __construct(private readonly string $note)
-    {
+    public function __construct(
+        private readonly string $note
+    ) {
     }
 
     public function getNote(): string

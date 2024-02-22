@@ -17,7 +17,6 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 final class MyMessengerHandler
 {
-
     public function __invoke(MyOtherFailingCommand $command): never
     {
         throw new \InvalidArgumentException('Failing by intention');

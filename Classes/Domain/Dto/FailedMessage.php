@@ -22,8 +22,15 @@ final class FailedMessage
     /**
      * @param class-string $message
      */
-    private function __construct(private readonly string $message, private readonly string $shortMessageClass, private readonly string $errorMessage, private readonly DateTimeInterface $redelivered, private readonly int $retryCount, private readonly mixed $messageId, private readonly string $transportName)
-    {
+    private function __construct(
+        private readonly string $message,
+        private readonly string $shortMessageClass,
+        private readonly string $errorMessage,
+        private readonly DateTimeInterface $redelivered,
+        private readonly int $retryCount,
+        private readonly mixed $messageId,
+        private readonly string $transportName
+    ) {
     }
 
     public function getShortMessageClass(): string

@@ -20,8 +20,9 @@ use Symfony\Contracts\Service\ServiceProviderInterface;
 
 final class FailedMessageRepository
 {
-    public function __construct(private readonly ServiceProviderInterface $failureTransports)
-    {
+    public function __construct(
+        private readonly ServiceProviderInterface $failureTransports
+    ) {
     }
 
     /**
