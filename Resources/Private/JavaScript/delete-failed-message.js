@@ -2,7 +2,7 @@ import { default as Modal } from '@typo3/backend/modal.js'
 import { SeverityEnum } from '@typo3/backend/enum/severity.js'
 import RegularEvent from '@typo3/core/event/regular-event.js'
 import AjaxRequest from '@typo3/core/ajax/ajax-request.js'
-import RefreshFailedMessages from './refresh-failed-messages.js'
+import DashboardWidget from '@typo3/dashboard/widget-content-collector.js';
 
 (() => {
     return new class {
@@ -39,7 +39,8 @@ import RefreshFailedMessages from './refresh-failed-messages.js'
                                     .delete(JSON.stringify(payload))
                                     .then(async function () {
                                         modal.hideModal();
-                                        RefreshFailedMessages.refresh();
+                                        const failedMessages = document.querySelector('[data-widget-key="failedMessages"]');
+                                        DashboardWidget.getContentForWidget(failedMessages);
                                     });
                             }
                         }
