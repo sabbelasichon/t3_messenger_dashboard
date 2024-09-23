@@ -33,7 +33,7 @@
     "helhum/typo3-console": "^8.0",
     "typo3/minimal": "^12.4",
     "typo3/cms-lowlevel": "^12.4",
-    "rector/rector": "^0.19.1"
+    "rector/rector": "^1.0.3"
   },
   "replace": {
     "typo3-ter/t3-messenger-dashboard": "self.version"
