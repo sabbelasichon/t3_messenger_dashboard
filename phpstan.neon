@@ -1,10 +1,7 @@
 parameters:
   editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'
-  level: 6
+  level: 8
   treatPhpDocTypesAsCertain: false
-  checkMissingIterableValueType: false
-  checkGenericClassInNonGenericObjectType: false
-  reportUnmatchedIgnoredErrors: false
   paths:
     - Classes
     - Tests

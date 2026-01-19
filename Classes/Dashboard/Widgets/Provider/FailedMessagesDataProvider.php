@@ -11,16 +11,20 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\Dashboard\Widgets\Provider;
 
+use Ssch\T3MessengerDashboard\Domain\Dto\FailedMessage;
 use Ssch\T3MessengerDashboard\Repository\FailedMessageRepository;
 use TYPO3\CMS\Dashboard\Widgets\ListDataProviderInterface;
 
-final class FailedMessagesDataProvider implements ListDataProviderInterface
+final readonly class FailedMessagesDataProvider implements ListDataProviderInterface
 {
     public function __construct(
-        private readonly FailedMessageRepository $failedMessageRepository
+        private FailedMessageRepository $failedMessageRepository
     ) {
     }
 
+    /**
+     * @return FailedMessage[]
+     */
     public function getItems(): array
     {
         return $this->failedMessageRepository->list();

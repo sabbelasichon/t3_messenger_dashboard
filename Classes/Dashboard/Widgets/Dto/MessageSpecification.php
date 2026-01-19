@@ -16,15 +16,15 @@ use Webmozart\Assert\Assert;
 
 final class MessageSpecification
 {
-    /**
-     * @param string|int $id
-     */
     private function __construct(
-        private $id,
+        private string|int $id,
         private readonly string $transport
     ) {
     }
 
+    /**
+     * @param array<mixed> $array
+     */
     public static function fromArray(array $array): self
     {
         Assert::keyExists($array, 'id');
@@ -38,10 +38,7 @@ final class MessageSpecification
         return new self($failedMessage->getMessageId(), $failedMessage->getTransportName());
     }
 
-    /**
-     * @return string|int
-     */
-    public function getId()
+    public function getId(): int|string
     {
         return $this->id;
     }

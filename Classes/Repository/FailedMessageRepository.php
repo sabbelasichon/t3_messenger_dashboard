@@ -18,10 +18,13 @@ use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
 use Symfony\Contracts\Service\ServiceProviderInterface;
 
-final class FailedMessageRepository
+final readonly class FailedMessageRepository
 {
+    /**
+     * @param ServiceProviderInterface<ListableReceiverInterface> $failureTransports
+     */
     public function __construct(
-        private readonly ServiceProviderInterface $failureTransports
+        private ServiceProviderInterface $failureTransports
     ) {
     }
 
@@ -60,7 +63,7 @@ final class FailedMessageRepository
     /**
      * @param Envelope[] $failedMessages
      *
-     * @return Envelope[];
+     * @return Envelope[]
      */
     private function inReverseOrder(iterable $failedMessages): array
     {
@@ -85,10 +88,7 @@ final class FailedMessageRepository
         return $failureTransport;
     }
 
-    /**
-     * @param string|int $messageId
-     */
-    private function findMessage($messageId, ListableReceiverInterface $failureTransport): Envelope
+    private function findMessage(int|string $messageId, ListableReceiverInterface $failureTransport): Envelope
     {
         $envelope = $failureTransport->find($messageId);
         if ($envelope === null) {
