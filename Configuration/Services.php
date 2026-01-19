@@ -14,8 +14,8 @@ use Ssch\T3MessengerDashboard\Dashboard\Widgets\Provider\FailedMessagesDataProvi
 use Ssch\T3MessengerDashboard\DependencyInjection\Compiler\FailureReceiverPass;
 use Ssch\T3MessengerDashboard\Repository\FailedMessageRepository;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\abstract_arg;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator, ContainerBuilder $containerBuilder): void {
