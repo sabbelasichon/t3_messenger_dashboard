@@ -13,7 +13,7 @@ namespace Ssch\T3MessengerDashboard\Dashboard\Widgets\Serializer;
 
 use Ssch\T3MessengerDashboard\Dashboard\Widgets\Dto\MessageSpecification;
 
-final class JsonSerializer
+final readonly class JsonSerializer
 {
     public function decode(string $json): MessageSpecification
     {

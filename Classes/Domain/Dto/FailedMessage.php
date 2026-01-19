@@ -17,19 +17,19 @@ use Symfony\Component\Messenger\Stamp\ErrorDetailsStamp;
 use Symfony\Component\Messenger\Stamp\RedeliveryStamp;
 use Symfony\Component\Messenger\Stamp\TransportMessageIdStamp;
 
-final class FailedMessage
+final readonly class FailedMessage
 {
     /**
      * @param class-string $message
      */
     private function __construct(
-        private readonly string $message,
-        private readonly string $shortMessageClass,
-        private readonly string $errorMessage,
-        private readonly DateTimeInterface $redelivered,
-        private readonly int $retryCount,
-        private readonly mixed $messageId,
-        private readonly string $transportName
+        private string $message,
+        private string $shortMessageClass,
+        private string $errorMessage,
+        private DateTimeInterface $redelivered,
+        private int $retryCount,
+        private mixed $messageId,
+        private string $transportName
     ) {
     }
 
@@ -38,10 +38,7 @@ final class FailedMessage
         return $this->shortMessageClass;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getMessageId()
+    public function getMessageId(): mixed
     {
         return $this->messageId;
     }

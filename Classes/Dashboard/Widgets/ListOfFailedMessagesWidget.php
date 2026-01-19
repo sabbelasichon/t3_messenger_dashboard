@@ -11,35 +11,53 @@ declare(strict_types=1);
 
 namespace Ssch\T3MessengerDashboard\Dashboard\Widgets;
 
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\View\BackendViewFactory;
 use TYPO3\CMS\Core\Page\JavaScriptModuleInstruction;
 use TYPO3\CMS\Dashboard\Widgets\JavaScriptInterface;
 use TYPO3\CMS\Dashboard\Widgets\ListDataProviderInterface;
+use TYPO3\CMS\Dashboard\Widgets\RequestAwareWidgetInterface;
 use TYPO3\CMS\Dashboard\Widgets\WidgetConfigurationInterface;
 use TYPO3\CMS\Dashboard\Widgets\WidgetInterface;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 
-final class ListOfFailedMessagesWidget implements WidgetInterface, JavaScriptInterface
+final class ListOfFailedMessagesWidget implements WidgetInterface, JavaScriptInterface, RequestAwareWidgetInterface
 {
+    private ServerRequestInterface $request;
+
+    /**
+     * @param array<mixed> $options
+     */
     public function __construct(
         private readonly WidgetConfigurationInterface $configuration,
         private readonly ListDataProviderInterface $dataProvider,
-        private readonly StandaloneView $view,
+        private readonly BackendViewFactory $backendViewFactory,
         private readonly array $options = []
     ) {
     }
 
+    public function setRequest(ServerRequestInterface $request): void
+    {
+        $this->request = $request;
+    }
+
     public function renderWidgetContent(): string
     {
-        $this->view->setTemplate('Widget/ListOfFailedMessagesWidget');
-        $this->view->assignMultiple([
+        $view = $this->backendViewFactory->create(
+            $this->request,
+            ['typo3/cms-backend', 'typo3/cms-dashboard', 'ssch/t3-messenger-dashboard']
+        );
+        $view->assignMultiple([
             'configuration' => $this->configuration,
             'failedMessages' => $this->dataProvider->getItems(),
             'options' => $this->options,
         ]);
 
-        return $this->view->render();
+        return $view->render('Widget/ListOfFailedMessagesWidget');
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function getOptions(): array
     {
         return $this->options;

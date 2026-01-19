@@ -2,12 +2,12 @@ import { default as Modal } from '@typo3/backend/modal.js'
 import { SeverityEnum } from '@typo3/backend/enum/severity.js'
 import RegularEvent from '@typo3/core/event/regular-event.js'
 import AjaxRequest from '@typo3/core/ajax/ajax-request.js'
-import DashboardWidget from '@typo3/dashboard/widget-content-collector.js';
 
 (() => {
     return new class {
         constructor() {
-            this.selector = ".js-t3-messenger-remove-message", this.initialize()
+            this.selector = ".js-t3-messenger-remove-message";
+            this.initialize();
         }
 
         initialize() {
@@ -39,8 +39,15 @@ import DashboardWidget from '@typo3/dashboard/widget-content-collector.js';
                                     .delete(JSON.stringify(payload))
                                     .then(async function () {
                                         modal.hideModal();
-                                        const failedMessages = document.querySelector('[data-widget-key="failedMessages"]');
-                                        DashboardWidget.getContentForWidget(failedMessages);
+                                        const failedMessagesWidget = document.querySelector('[data-widget-key="failedMessages"]');
+
+                                        if(failedMessagesWidget) {
+                                            const refreshButton = failedMessagesWidget.querySelector('.widget-action-refresh');
+
+                                            if(refreshButton) {
+                                                refreshButton.click();
+                                            }
+                                        }
                                     });
                             }
                         }
