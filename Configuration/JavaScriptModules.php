@@ -12,6 +12,7 @@ declare(strict_types=1);
 return [
     'dependencies' => ['core', 'backend'],
     'imports' => [
-        '@ssch/t3-messenger-dashboard/' => 'EXT:t3_messenger_dashboard/Resources/Public/JavaScript/',
+        '@ssch/t3-messenger-dashboard/delete-failed-message.js' => 'EXT:t3_messenger_dashboard/Resources/Public/JavaScript/delete-failed-message.js',
+        '@ssch/t3-messenger-dashboard/scroll-to-failed-message.js' => 'EXT:t3_messenger_dashboard/Resources/Public/JavaScript/scroll-to-failed-message.js',
     ],
 ];
