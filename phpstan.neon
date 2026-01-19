@@ -9,4 +9,6 @@ parameters:
   excludePaths:
     analyse:
       -  Tests/Functional/Fixtures/Extensions/*
-
+  ignoreErrors:
+    - "#Function Symfony\\\\Component\\\\DependencyInjection\\\\Loader\\\\Configurator\\\\abstract_arg not found#"
+    - "#Class Symfony\\\\Component\\\\Messenger\\\\Bridge\\\\Redis\\\\Transport\\\\RedisTransportFactory not found#"
